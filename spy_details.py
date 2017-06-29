@@ -19,7 +19,7 @@ friend_3 = Spy('jack sparrow','mr','32','5')
 friends = [friend_1,friend_2,friend_3]
 
 
-#another class for storing chat history
+#another class for  chat history
 class chatmessage:
     def __init__(self, message, sent_by_me):
         self.message = message
