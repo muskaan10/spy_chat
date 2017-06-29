@@ -10,7 +10,7 @@ def add_friend():
     new_friend.salutation = raw_input("are they mr or miss : ")
     new_friend.age = int(raw_input("age: "))
     new_friend.rating = float(raw_input("rating: "))
-    if len(new_friend.name) > 0 and new_friend.age > 12 and new_friend.rating > spy.rating:
+    if len(new_friend.name) > 0 and new_friend.age > 12 and new_friend.rating >= spy.rating:
         friends.append(new_friend)
     else:
         print("sorry! invalid entry. we can't add a spy with the details you provided. please try again later. ")
@@ -24,7 +24,11 @@ def select_a_friend():
         number = number + 1
     select_friend = raw_input("choose from your friendlist. ")
     select_friend_postion = int(select_friend) - 1
-    return select_friend_postion
+    if select_friend_postion > number:
+        print("invalid index entered")
+        start_chat(spy.name,spy.age,spy.rating)
+    else:
+        return select_friend_postion
 
 #defining the function so that you can send a message in encrypted form.
 def send_a_message():
