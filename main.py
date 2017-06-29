@@ -2,7 +2,7 @@
 from spy_details import Spy,spy, friends, chatmessage
 from steganography.steganography import Steganography
 from datetime import datetime
-
+from termcolor import colored, cprint
 #defining a function to add a friend
 def add_friend():
     new_friend = Spy('', '', 0, 0.0)
@@ -36,6 +36,7 @@ def send_a_message():
         print("u cannot send empty message!!!!")
     elif len(text) > 100:
         print("you exceed the message limit .. please try again later!!!!")
+        del friends[select_friend]
     else:
         Steganography.encode(original_image, output_path, text)
         chats = chatmessage(text, True)
@@ -58,8 +59,14 @@ def read_chat():
     read_for = select_a_friend()
     for chats in friends[read_for].chat:
         if chats.sent_by_me:
+            text1 = colored(chats.time.strftime("%a, %d %b %Y %H:%M:%S +0000"), 'blue', attrs=['reverse', 'blink'])
+            print(text1)
+            cprint(' you said', 'green', 'on_red')
             print '[%s] %s: %s' % (chats.time.strftime("%d %B %Y"), 'You said:', chats.message)
         else:
+            text1 = colored(chats.time.strftime("%a, %d %b %Y %H:%M:%S +0000"), 'blue', attrs=['reverse', 'blink'])
+            print(text1)
+            cprint(friends[read_for].name, 'green', 'on_red')
             print '[%s] %s said: %s' % (chats.time.strftime("%d %B %Y"), friends[read_for].name, chats.message)
 
 
