@@ -8,9 +8,9 @@ def add_friend():
     new_friend = Spy('', '', 0, 0.0)
     new_friend.name = raw_input("please add your friends name : ")
     new_friend.salutation = raw_input("are they mr or miss : ")
-    new_friend.age = raw_input("age: ")
-    new_friend.rating = raw_input("rating: ")
-    if len(new_friend.name) > 0 and new_friend.age > 12 and new_friend.rating >= spy.rating:
+    new_friend.age = int(raw_input("age: "))
+    new_friend.rating = float(raw_input("rating: "))
+    if len(new_friend.name) > 0 and new_friend.age > 12 and new_friend.rating > spy.rating:
         friends.append(new_friend)
     else:
         print("sorry! invalid entry. we can't add a spy with the details you provided. please try again later. ")
@@ -61,13 +61,11 @@ def read_chat():
         if chats.sent_by_me:
             text1 = colored(chats.time.strftime("%a, %d %b %Y %H:%M:%S +0000"), 'blue', attrs=['reverse', 'blink'])
             print(text1)
-            cprint(' you said', 'green', 'on_red')
-            print '[%s] %s: %s' % (chats.time.strftime("%d %B %Y"), 'You said:', chats.message)
+            print colored(' you said : ', 'green', 'on_red'), chats.message
         else:
             text1 = colored(chats.time.strftime("%a, %d %b %Y %H:%M:%S +0000"), 'blue', attrs=['reverse', 'blink'])
             print(text1)
-            cprint(friends[read_for].name, 'green', 'on_red')
-            print '[%s] %s said: %s' % (chats.time.strftime("%d %B %Y"), friends[read_for].name, chats.message)
+            print colored(friends[read_for].name, 'green', 'on_red'), chats.message
 
 
 print("welcome to spy chat application.")
@@ -92,7 +90,8 @@ def add_status_message(current_status_message):
             for message in status_messages:
                 print(str(item_position) + "." + message)
                 item_position = int(item_position) + 1
-            message_selection = int(raw_input("choose from above messages : "))
+            message_selection = raw_input("choose from above messages : ")
+            message_selection = int(message_selection)
             if len(status_messages) >= message_selection:
                 updated_message = status_messages[message_selection - 1]
                 return updated_message
